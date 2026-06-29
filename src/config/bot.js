@@ -15,12 +15,6 @@ export const botConfig = {
     emoji: "💸",
     text: "Powered by ClawnMC",
   },
-
-        type: 0,
-      },
-    ],
-  },
-
   // =========================
   // COMMAND BEHAVIOR
   // =========================
