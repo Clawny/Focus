@@ -115,18 +115,10 @@ export const botConfig = {
       icon: null,
       url: null,
     },
-  },
 
   // =========================
   // ECONOMY SETTINGS
   // =========================
-  author: {
-      name: null,
-      icon: null,
-      url: null,
-    },
-  }, // <-- ADD THIS EXACT BRACKET AND COMMA RIGHT HERE
-
   economy: {
     currency: {
       // Currency display name.
