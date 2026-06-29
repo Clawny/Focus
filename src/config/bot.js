@@ -48,82 +48,62 @@ export const botConfig = {
       { question: "Why do you want to join?", required: true },
     ],
 
-    // Embed colors by application status.
-    statusColors: {
-      pending: "#FFA500",
-      approved: "#00FF00",
-      denied: "#FF0000",
-    },
-
-    // How long users must wait before submitting another application (hours).
-    applicationCooldown: 24,
-
-    // Auto-delete denied applications after this many days.
-    deleteDeniedAfter: 7,
-
-    // Auto-delete approved applications after this many days.
-    deleteApprovedAfter: 30,
-
-    // Role IDs allowed to manage applications.
-    managerRoles: [], // Will be populated from environment or database
-  },
-
-  // =========================
+    // =========================
   // EMBED COLORS & BRANDING
   // =========================
   // IMPORTANT: This is the SINGLE SOURCE OF TRUTH for all bot colors
   embeds: {
     colors: {
       // Main brand colors.
-      primary: "#336699",
-      secondary: "#2F3136",
+      primary: "#2B2D31",    // Matches Discord Dark Mode perfectly (Seamless/invisible edges)
+      secondary: "#FFB6C1",  // Soft pastel pink accent
 
-      // Standard status colors for success/error/warning/info messages.
-      success: "#57F287",
-      error: "#ED4245",
-      warning: "#FEE75C",
-      info: "#3498DB",
+      // Standard status colors tuned to a soft aesthetic palette
+      success: "#A3E4D7",    // Soft mint green
+      error: "#F1948A",      // Pastel rose red
+      warning: "#F9E79F",    // Soft pastel yellow
+      info: "#AED6F1",       // Soft cloud blue
 
       // Neutral utility colors.
       light: "#FFFFFF",
-      dark: "#202225",
+      dark: "#2B2D31",
       gray: "#99AAB5",
 
       // Discord-style palette shortcuts.
       blurple: "#5865F2",
-      green: "#57F287",
-      yellow: "#FEE75C",
+      green: "#A3E4D7",
+      yellow: "#F9E79F",
       fuchsia: "#EB459E",
-      red: "#ED4245",
+      red: "#F1948A",
       black: "#000000",
 
       // Feature-specific colors.
       giveaway: {
-        active: "#57F287",
-        ended: "#ED4245",
+        active: "#A3E4D7",
+        ended: "#F1948A",
       },
       ticket: {
-        open: "#57F287",
+        open: "#A3E4D7",
         claimed: "#FAA61A",
-        closed: "#ED4245",
+        closed: "#F1948A",
         pending: "#99AAB5",
       },
-      economy: "#F1C40F",
+      economy: "#F9E79F",
       birthday: "#E91E63",
-      moderation: "#9B59B6",
+      moderation: "#BB8FCE",
 
       // Ticket priority color mapping.
       priority: {
         none: "#95A5A6",
-        low: "#3498db",
-        medium: "#2ecc71",
-        high: "#f1c40f",
-        urgent: "#e74c3c",
+        low: "#AED6F1",
+        medium: "#A3E4D7",
+        high: "#F9E79F",
+        urgent: "#F1948A",
       },
     },
     footer: {
-      // Default footer text used in bot embeds.
-      text: "Titan Bot",
+      // Default footer text used in bot embeds with clean branding symbols.
+      text: "✦ Focus Ecosystem ✦",
       // Footer icon URL (null = no icon).
       icon: null,
     },
