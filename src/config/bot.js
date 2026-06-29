@@ -13,6 +13,14 @@ export const botConfig = {
     // Current online state shown on Discord.
     status: "online",
 
+    activities: [
+      {
+        name: "Powered by Clawny",
+        type: 0, // 0 = Playing status
+      },
+    ],
+  },
+
     // Activity lines shown under the bot name.
     // `type` number mapping from Discord:
     // 0 = Playing
