@@ -14,15 +14,40 @@ export default {
     try {
       const presence = config.bot.presence;
 
+      // ==========================================
+      // AUTOMATIC ROTATING STATUS LOOP (15s)
+      // ==========================================
+      const statuses = [
+        { name: "Powered by Clawny", type: 0 },                       // Playing
+        { name: `over ${client.guilds.cache.size} servers`, type: 3 },      // Watching
+        { name: "✦ Focus Ecosystem ✦", type: 2 },                     // Listening
+        { name: "!help for commands", type: 0 }                       // Playing
+      ];
+
+      let currentStatusIndex = 0;
+
+      // Set initial status immediately on login
       client.user.setPresence({
         status: presence.status || "online",
-        activities: [{
-          type: 4, 
-          name: "custom", 
-          state: presence.text,
-          emoji: presence.emoji ? { name: presence.emoji } : null
-        }]
+        activities: [statuses[currentStatusIndex]]
       });
+
+      // Rotate status every 15 seconds safely
+      setInterval(() => {
+        currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
+        const nextStatus = { ...statuses[currentStatusIndex] };
+
+        // Keep server count live and accurate
+        if (nextStatus.name.includes("servers")) {
+          nextStatus.name = `over ${client.guilds.cache.size} servers`;
+        }
+
+        client.user.setPresence({
+          status: presence.status || "online",
+          activities: [nextStatus]
+        });
+      }, 15000);
+      // ==========================================
 
       startupLog(`Ready! Logged in as ${client.user.tag}`);
       if (client.config?.features?.music) {
