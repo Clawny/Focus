@@ -12,19 +12,17 @@ export default {
 
   async execute(client) {
     try {
-      const presence = config.bot.presence;
-
       // ==========================================================
-      // EXACT CUSTOM STATUS BUBBLE SETTINGS (Like Saathiya)
+      // FORCE EXACT CUSTOM STATUS BUBBLE (Saathiya Style)
       // ==========================================================
-      client.user.setPresence({
-        status: presence.status || "online", // Set the online status dot (online, idle, dnd)
-        activities: [{
-          type: 4,                        // Type 4 forces the pure "Custom Status" bubble layout
-          name: "custom",                 // Required placeholder by Discord's gateway API
-          state: "✦ Focus Ecosystem ✦",   // Put your exact status text bubble content here!
-        }]
+      client.user.setActivity({
+        name: "custom",                 // Must be exactly "custom"
+        type: 4,                        // Type 4 forces the pure text status bubble
+        state: "🌸 Connect • Chill • Belong" // Replace this text with whatever you want!
       });
+
+      // Optional: Set the dot status separately
+      client.user.setStatus("online"); 
       // ==========================================================
 
       startupLog(`Ready! Logged in as ${client.user.tag}`);
