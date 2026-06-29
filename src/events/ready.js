@@ -12,12 +12,19 @@ export default {
 
   async execute(client) {
     try {
-      client.user.setPresence(config.bot.presence);
+      const presence = config.bot.presence;
+
+      client.user.setPresence({
+        status: presence.status || "online",
+        activities: [{
+          type: 4, 
+          name: "custom", 
+          state: presence.text,
+          emoji: presence.emoji ? { name: presence.emoji } : null
+        }]
+      });
 
       startupLog(`Ready! Logged in as ${client.user.tag}`);
-      startupLog(`Serving ${client.guilds.cache.size} guild(s)`);
-      startupLog(`Loaded ${client.commands.size} commands`);
-
       if (client.config?.features?.music) {
         initRiffyAfterReady(client);
       }
