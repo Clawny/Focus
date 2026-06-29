@@ -12,33 +12,9 @@ export const botConfig = {
   presence: {
     // Current online state shown on Discord.
     status: "online",
-
-    activities: [
-      {
-        name: "Powered by Clawny",
-        type: 0, // 0 = Playing status
-      },
-    ],
+    emoji: "💸",
+    text: "💸Powered by Clawny",
   },
-
-    // Activity lines shown under the bot name.
-    // `type` number mapping from Discord:
-    // 0 = Playing
-    // 1 = Streaming
-    // 2 = Listening
-    // 3 = Watching
-    // 4 = Custom
-    // 5 = Competing
-    activities: [
-      {
-        // Text users will see custom branded
-        name: "Powered by Clawny",
-        // Activity type number (0 = Playing).
-        type: 0,
-      },
-    ],
-  },
-
   // =========================
   // COMMAND BEHAVIOR
   // =========================
@@ -74,9 +50,9 @@ export const botConfig = {
 
     // Embed colors by application status.
     statusColors: {
-      pending: "#F9E79F",
-      approved: "#A3E4D7",
-      denied: "#F1948A",
+      pending: "#FFA500",
+      approved: "#00FF00",
+      denied: "#FF0000",
     },
 
     // How long users must wait before submitting another application (hours).
@@ -99,55 +75,55 @@ export const botConfig = {
   embeds: {
     colors: {
       // Main brand colors.
-      primary: "#2B2D31",    // Matches Discord Dark Mode perfectly (Seamless/invisible edges)
-      secondary: "#FFB6C1",  // Soft pastel pink accent
+      primary: "#336699",
+      secondary: "#2F3136",
 
-      // Standard status colors tuned to a soft aesthetic palette
-      success: "#A3E4D7",    // Soft mint green
-      error: "#F1948A",      // Pastel rose red
-      warning: "#F9E79F",    // Soft pastel yellow
-      info: "#AED6F1",       // Soft cloud blue
+      // Standard status colors for success/error/warning/info messages.
+      success: "#57F287",
+      error: "#ED4245",
+      warning: "#FEE75C",
+      info: "#3498DB",
 
       // Neutral utility colors.
       light: "#FFFFFF",
-      dark: "#2B2D31",
+      dark: "#202225",
       gray: "#99AAB5",
 
       // Discord-style palette shortcuts.
       blurple: "#5865F2",
-      green: "#A3E4D7",
-      yellow: "#F9E79F",
+      green: "#57F287",
+      yellow: "#FEE75C",
       fuchsia: "#EB459E",
-      red: "#F1948A",
+      red: "#ED4245",
       black: "#000000",
 
       // Feature-specific colors.
       giveaway: {
-        active: "#A3E4D7",
-        ended: "#F1948A",
+        active: "#57F287",
+        ended: "#ED4245",
       },
       ticket: {
-        open: "#A3E4D7",
+        open: "#57F287",
         claimed: "#FAA61A",
-        closed: "#F1948A",
+        closed: "#ED4245",
         pending: "#99AAB5",
       },
-      economy: "#F9E79F",
+      economy: "#F1C40F",
       birthday: "#E91E63",
-      moderation: "#BB8FCE",
+      moderation: "#9B59B6",
 
       // Ticket priority color mapping.
       priority: {
         none: "#95A5A6",
-        low: "#AED6F1",
-        medium: "#A3E4D7",
-        high: "#F9E79F",
-        urgent: "#F1948A",
+        low: "#3498db",
+        medium: "#2ecc71",
+        high: "#f1c40f",
+        urgent: "#e74c3c",
       },
     },
     footer: {
-      // Default footer text used in bot embeds with clean branding symbols.
-      text: "✦ Focus Ecosystem ✦",
+      // Default footer text used in bot embeds.
+      text: "Titan Bot",
       // Footer icon URL (null = no icon).
       icon: null,
     },
@@ -226,22 +202,22 @@ export const botConfig = {
       },
       low: {
         emoji: "🟢",
-        color: "#AED6F1",
+        color: "#2ECC71",
         label: "Low",
       },
       medium: {
         emoji: "🟡",
-        color: "#A3E4D7",
+        color: "#F1C40F",
         label: "Medium",
       },
       high: {
         emoji: "🔴",
-        color: "#F9E79F",
+        color: "#E74C3C",
         label: "High",
       },
       urgent: {
         emoji: "🚨",
-        color: "#F1948A",
+        color: "#E91E63",
         label: "Urgent",
       },
     },
