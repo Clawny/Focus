@@ -1,4 +1,4 @@
-import { Events } from "discord.js";
+import { Events, ActivityType } from "discord.js";
 import { logger, startupLog } from "../utils/logger.js";
 import config from "../config/application.js";
 import { reconcileReactionRoleMessages } from "../services/reactionRoleService.js";
@@ -12,17 +12,43 @@ export default {
 
   async execute(client) {
     try {
-      // ==========================================================
-      // FORCE EXACT CUSTOM STATUS BUBBLE (Saathiya Style)
-      // ==========================================================
-      client.user.setActivity({
-        name: "custom",                 // Must be exactly "custom"
-        type: 4,                        // Type 4 forces the pure text status bubble
-        state: "🌸 Connect • Chill • Belong" // Replace this text with whatever you want!
-      });
+      const presence = config.bot.presence;
 
-      // Optional: Set the dot status separately
-      client.user.setStatus("online"); 
+      // ==========================================================
+      // STABLE ROTATING PURE TEXT CUSTOM STATUS LOOP
+      // ==========================================================
+      let currentStatusIndex = 0;
+
+      const setBotPresence = () => {
+        const serverCount = client.guilds.cache.size || 1;
+
+        // Custom list of clean text statuses
+        const customStatuses = [
+          "🌸 Powered by Clawny",
+          "👑 Chudogi?",
+          `📊 over ${serverCount} servers`,
+          "✦ Focus Ecosystem ✦"
+        ];
+
+        // Correctly pass Custom status using ActivityType.Custom (type: 4)
+        client.user.setPresence({
+          status: presence.status || "online",
+          activities: [{
+            type: ActivityType.Custom,
+            name: "custom",
+            state: customStatuses[currentStatusIndex]
+          }]
+        });
+
+        // Rotate index safely
+        currentStatusIndex = (currentStatusIndex + 1) % customStatuses.length;
+      };
+
+      // Fire once immediately on boot
+      setBotPresence();
+
+      // Rotate every 20 seconds to prevent Discord from blocking it
+      setInterval(setBotPresence, 20000);
       // ==========================================================
 
       startupLog(`Ready! Logged in as ${client.user.tag}`);
