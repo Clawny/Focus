@@ -13,7 +13,7 @@ export const botConfig = {
     // Current online state shown on Discord.
     status: "online",
     emoji: "💸",
-    text: "💸Powered by ClawnMC",
+    text: "💸Powered by Clawny",
   },
   // =========================
   // COMMAND BEHAVIOR
