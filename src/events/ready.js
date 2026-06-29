@@ -15,38 +15,37 @@ export default {
       const presence = config.bot.presence;
 
       // ==========================================
-      // AUTOMATIC ROTATING STATUS LOOP (15s)
+      // STABLE ROTATING STATUS LOOP
       // ==========================================
-      const statuses = [
-        { name: "Powered by Clawny", type: 0 },                       // Playing
-        { name: `over ${client.guilds.cache.size} servers`, type: 3 },      // Watching
-        { name: "✦ Focus Ecosystem ✦", type: 2 },                     // Listening
-        { name: "!help for commands", type: 0 }                       // Playing
-      ];
-
       let currentStatusIndex = 0;
 
-      // Set initial status immediately on login
-      client.user.setPresence({
-        status: presence.status || "online",
-        activities: [statuses[currentStatusIndex]]
-      });
+      const setBotPresence = () => {
+        // Safely check server count, fallback to 1 if cache hasn't loaded yet
+        const serverCount = client.guilds.cache.size || 1;
 
-      // Rotate status every 15 seconds safely
-      setInterval(() => {
-        currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
-        const nextStatus = { ...statuses[currentStatusIndex] };
+        const statuses = [
+          { name: "Powered by Clawny", type: 0 },                       // Playing
+          { name: `over ${serverCount} servers`, type: 3 },             // Watching
+          { name: "✦ Focus Ecosystem ✦", type: 2 },                     // Listening
+          { name: "!help for commands", type: 0 }                       // Playing
+        ];
 
-        // Keep server count live and accurate
-        if (nextStatus.name.includes("servers")) {
-          nextStatus.name = `over ${client.guilds.cache.size} servers`;
-        }
+        const nextStatus = statuses[currentStatusIndex];
 
         client.user.setPresence({
           status: presence.status || "online",
           activities: [nextStatus]
         });
-      }, 15000);
+
+        // Move to the next item in the list
+        currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
+      };
+
+      // Run once immediately on startup
+      setBotPresence();
+
+      // Rotate every 15 seconds safely
+      setInterval(setBotPresence, 15000);
       // ==========================================
 
       startupLog(`Ready! Logged in as ${client.user.tag}`);
