@@ -14,39 +14,18 @@ export default {
     try {
       const presence = config.bot.presence;
 
-      // ==========================================
-      // STABLE ROTATING STATUS LOOP
-      // ==========================================
-      let currentStatusIndex = 0;
-
-      const setBotPresence = () => {
-        // Safely check server count, fallback to 1 if cache hasn't loaded yet
-        const serverCount = client.guilds.cache.size || 1;
-
-        const statuses = [
-          { name: "Powered by Clawny", type: 0 },                       // Playing
-          { name: `over ${serverCount} servers`, type: 3 },             // Watching
-          { name: "✦ Focus Ecosystem ✦", type: 2 },                     // Listening
-          { name: "!help for commands", type: 0 }                       // Playing
-        ];
-
-        const nextStatus = statuses[currentStatusIndex];
-
-        client.user.setPresence({
-          status: presence.status || "online",
-          activities: [nextStatus]
-        });
-
-        // Move to the next item in the list
-        currentStatusIndex = (currentStatusIndex + 1) % statuses.length;
-      };
-
-      // Run once immediately on startup
-      setBotPresence();
-
-      // Rotate every 15 seconds safely
-      setInterval(setBotPresence, 15000);
-      // ==========================================
+      // ==========================================================
+      // EXACT CUSTOM STATUS BUBBLE SETTINGS (Like Saathiya)
+      // ==========================================================
+      client.user.setPresence({
+        status: presence.status || "online", // Set the online status dot (online, idle, dnd)
+        activities: [{
+          type: 4,                        // Type 4 forces the pure "Custom Status" bubble layout
+          name: "custom",                 // Required placeholder by Discord's gateway API
+          state: "✦ Focus Ecosystem ✦",   // Put your exact status text bubble content here!
+        }]
+      });
+      // ==========================================================
 
       startupLog(`Ready! Logged in as ${client.user.tag}`);
       if (client.config?.features?.music) {
